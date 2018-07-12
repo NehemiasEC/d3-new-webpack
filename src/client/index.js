@@ -1,1 +1,1 @@
-console.log("hol amundo")
+import "./scss/style.scss";

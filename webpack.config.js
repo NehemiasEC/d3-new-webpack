@@ -2,10 +2,16 @@ const webpack = require('webpack');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const liveReloadPlugin = require('webpack-livereload-plugin');
 const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+
 
 module.exports={
     mode:"development",
-    entry:'./src/client/index.js',
+    entry: {
+        main: './src/client/index.js',
+        app:'./src/client/js/app.js'
+    },
     output:{
         path:path.join(__dirname,'/dist'),
         filename:'bundle.js'
@@ -13,7 +19,12 @@ module.exports={
     module:{
         rules:[
             {
-                use:'babel-loader',
+                use:[{
+                    loader:'babel-loader',
+                    options:{
+                        presets:['env','react']
+                    }
+                }],
                 test:/\.js$/,
                 exclude:/node_modules/
             },
@@ -23,21 +34,7 @@ module.exports={
             },
             {
                 test:/\.scss$/,
-                use:[
-                    {
-                        loader:'style-loader'
-                    },
-                    {
-                        loader:'css-loader',options:{
-                            sourceMap:true
-                        }
-                    },
-                    {
-                        loader:'sass-loader',options:{
-                            sourceMap:true
-                        }
-                    }
-                ]
+                use:['style-loader','css-loader','sass-loader']
             }
         ]
     },
@@ -45,6 +42,7 @@ module.exports={
         new htmlWebpackPlugin({
             template:'src/client/index.html'
         }),
+        
         new liveReloadPlugin()
     ]
 }

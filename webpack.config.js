@@ -14,7 +14,8 @@ module.exports={
     },
     output:{
         path:path.join(__dirname,'/dist'),
-        filename:'bundle.js'
+        publicPath: "/assets/",
+        filename:'[name].js',
     },
     module:{
         rules:[
@@ -42,7 +43,7 @@ module.exports={
         new htmlWebpackPlugin({
             template:'src/client/index.html'
         }),
-        
+
         new liveReloadPlugin()
     ]
 }

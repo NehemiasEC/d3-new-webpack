@@ -1,11 +1,28 @@
 $themeColor-Light: #f3e2c7;
 $themeColor-Dark:#222;
 
-svg{
-    text{
-        glyph-orientation-vertical:0;
-    }
+svg rect{
+    overflow: hidden;
 }
 p{
     color: "red";
+}
+
+#chart{
+    width: 800px;
+    display: inline-block;
+    height: 300px;
+    background-color: #f7f7f7;
+    padding: 10px;
+    margin: 25px auto;
+}
+.bar{
+    display: inline-block;
+    vertical-align: bottom;
+    border: 3px solid transparent;
+    border-color: rgba(10,10,10,0.5);
+    width: 25px;
+    height: 300px;
+    margin-right: 10px;
+    background-color: rgba(100,250,100,0.5);
 }

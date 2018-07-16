@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack",
-    "start": "webpack-dev-server --mode development --hot"
+    "start": "npm run dev & webpack-dev-server --mode development --hot"
   },
   "author": "NehemiasEC",
   "license": "ISC",

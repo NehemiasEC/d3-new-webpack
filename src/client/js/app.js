@@ -30,6 +30,7 @@ d3.csv("/data/cities.csv", function(data) {
 
 */
 
+
 var dataset=[];
 var chart_width = 800;
 var chart_height = 400;
@@ -81,8 +82,62 @@ svg.selectAll('text')
         return chart_height -d *10 + 15;
     })
     .attr('fill','black')
-    .attr('font-size','24')
+    .attr('font-size','24');
 
+var data = [
+    [400,200],
+    [210,140],
+    [722,300],
+    [70,160],
+    [250,50],
+    [325,250],
+    [410,50],
+    [470,300]
+]
+
+var width=800;
+var height=400;
+
+var svg1 = d3.select("#chart2")
+    .append("svg")
+    .attr('width', width)
+    .attr('height', height);
+
+
+
+//create circles
+
+svg1.selectAll('circle')
+    .data(data)
+    .enter()
+    .append('circle')
+    .attr('cx',function(d){
+        return d[0];
+    })
+    .attr('cy',function(d){
+        return d[1];
+    })
+    .attr('r',function(d){
+        return d[1]/5;
+    })
+    .attr('fill',function(){
+        return '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+    });
+svg1.selectAll('text')
+    .data(data)
+    .enter()
+    .append('text')
+    .text(function(d){
+        return d.join(',');
+    })
+    .attr('x',function(d){
+        return d[0];
+    })
+    .attr('y',function(d){
+        return d[1];
+    })
+
+    //create levels
 /*
 function generate(dataset){
     var el = d3.select('body')

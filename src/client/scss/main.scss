@@ -10,7 +10,7 @@ p{
     color: black;
 }
 
-#chart{
+#chart , #chart2{
     width: 800px;
     display: inline-block;
     height: 400px;
@@ -18,6 +18,13 @@ p{
     padding: 10px;
     margin: 25px auto;
 }
+/*#chart2{
+    width: 800px;
+    height: 400px;
+    background-color: #C2C2C2;
+    padding: 10px;
+    margin: 25px auto;
+}*/
 .bar{
     display: inline-block;
     vertical-align: bottom;

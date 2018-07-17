@@ -9,6 +9,12 @@ body {
       color: $themeColor-Dark
   }
 }
+svg rect{
+    display: inline-block;
+    vertical-align: bottom;
+    background-color: "red";
+    position: absolute;
+}
 /*
 svg{
     background-color: rgba(80,180,150,1);

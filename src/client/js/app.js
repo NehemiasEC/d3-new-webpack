@@ -33,6 +33,7 @@ d3.csv("/data/cities.csv", function(data) {
 var dataset=[];
 var chart_width = 800;
 var chart_height = 400;
+var bar_padding = 5;
 
 
 for (var i=0;i<10;i++){
@@ -58,9 +59,29 @@ svg.selectAll("rect")
     .attr('x',function(d,i){
         return i * (chart_width/dataset.length);
     })
-    .attr('y',0)
-    .attr('width',25)
-    .attr('height',100);
+    .attr('y',function(d){
+        return chart_height -d*10;
+    })
+    .attr('width',chart_width/dataset.length-bar_padding)
+    .attr('height',function(d){
+        return d*10;
+    });
+
+svg.selectAll('text')
+    .data(dataset)
+    .enter()
+    .append('text')
+    .text(function(d){
+        return d;
+    })
+    .attr('x',function(d,i){
+        return i * (chart_width/dataset.length)+5;
+    })
+    .attr('y',function(d){
+        return chart_height -d *10 + 15;
+    })
+    .attr('fill','black')
+    .attr('font-size','24')
 
 /*
 function generate(dataset){

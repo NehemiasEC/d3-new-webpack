@@ -2,16 +2,18 @@ $themeColor-Light: #f3e2c7;
 $themeColor-Dark:#222;
 
 svg rect{
-    overflow: hidden;
+    overflow: visible;
+    fill:rgba(255,50,50,0.5);
 }
+
 p{
-    color: "red";
+    color: black;
 }
 
 #chart{
     width: 800px;
     display: inline-block;
-    height: 300px;
+    height: 400px;
     background-color: #f7f7f7;
     padding: 10px;
     margin: 25px auto;

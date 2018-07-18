@@ -92,9 +92,9 @@ var data = [
     [250,50],
     [325,250],
     [410,50],
-    [470,300]
+    [470,300],
+    [100,100],
 ]
-
 var width=800;
 var height=400;
 
@@ -102,11 +102,20 @@ var svg1 = d3.select("#chart2")
     .append("svg")
     .attr('width', width)
     .attr('height', height);
+//create scaleLinea
+var x_scale = d3.scaleLinear()
+    .domain([0,d3.max(data,function(d){
+        return d[0]
+    })])
+    .range([0,chart_width]);
 
-
+var y_scale = d3.scaleLinear()
+    .domain([0,d3.max(data,function(d){
+        return d[1]
+    })])
+    .range([0,chart_height])
 
 //create circles
-
 svg1.selectAll('circle')
     .data(data)
     .enter()
@@ -131,12 +140,18 @@ svg1.selectAll('text')
         return d.join(',');
     })
     .attr('x',function(d){
-        return d[0];
+        return x_scale(d[0]);
     })
     .attr('y',function(d){
-        return d[1];
+        return y_scale(d[0]);
     })
 
+var slices= [100,200,300,400,500];
+var x = d3.scaleLinear()
+    .domain([d3.min(slices),d3.max(slices)])
+    .range([10,350]);
+
+console.log(x(600))
     //create levels
 /*
 function generate(dataset){

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack",
+    "dev": "./node_modules/bin/webpack",
     "start": "npm run dev & webpack-dev-server --mode development --hot"
   },
   "author": "NehemiasEC",

@@ -1,4 +1,5 @@
  import * as d3 from 'd3';
+ import dashboard from './dashboard'
 /*
 d3.csv("assets/data/data.csv").then(function(data){
     console.log(data)
@@ -152,6 +153,7 @@ var x = d3.scaleLinear()
     .range([10,350]);
 
 console.log(x(600))
+dashboard()
     //create levels
 /*
 function generate(dataset){

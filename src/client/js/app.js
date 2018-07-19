@@ -1,5 +1,73 @@
+import * as d3 from 'd3';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
  import * as d3 from 'd3';
  import dashboard from './dashboard'
+
+
+
+ var dataset=[];
+ var chart_width = 800;
+ var chart_height = 400;
+ var bar_padding = 5;
+ var date = "07/01/2015"
+
+
+var dates = [
+    {date:'07/01/2017',num:20},
+    {date:'07/02/2017',num:37},
+    {date:'07/03/2017',num:25},
+    {date:'07/04/2017',num:45},
+    {date:'07/05/2017',num:23}
+]
+var time_parse= d3.timeParse('%m/%d/%Y');
+var convertidos=[]
+
+date = time_parse(date)
+
+
+dates=dates.map((d,i)=>{
+    return time_parse(d['date'])
+})
+console.log("este es dates"+dates)
+console.log(dates)
+console.log("este es date "+date)
+
+
+
 /*
 d3.csv("assets/data/data.csv").then(function(data){
     console.log(data)
@@ -29,13 +97,9 @@ d3.csv("/data/cities.csv", function(data) {
   console.log(data[0]);
 });
 
-*/
 
 
-var dataset=[];
-var chart_width = 800;
-var chart_height = 400;
-var bar_padding = 5;
+
 
 
 for (var i=0;i<10;i++){

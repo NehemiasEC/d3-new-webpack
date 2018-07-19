@@ -98,6 +98,7 @@ var data = [
 ]
 var width=800;
 var height=400;
+var padding= 50;
 
 var svg1 = d3.select("#chart2")
     .append("svg")
@@ -108,27 +109,34 @@ var x_scale = d3.scaleLinear()
     .domain([0,d3.max(data,function(d){
         return d[0]
     })])
-    .range([0,chart_width]);
+    .range([padding,chart_width-padding]);
 
 var y_scale = d3.scaleLinear()
     .domain([0,d3.max(data,function(d){
         return d[1]
     })])
-    .range([0,chart_height])
+    .range([chart_height- padding,padding])
 
+
+var r_scale= d3.scaleLinear()
+    .domain([0,d3.max(data,function(d){
+        return d[1];
+    })])
+    .range([5,30])
+    .clamp(true);
 //create circles
 svg1.selectAll('circle')
     .data(data)
     .enter()
     .append('circle')
     .attr('cx',function(d){
-        return d[0];
+        return x_scale(d[0]);
     })
     .attr('cy',function(d){
-        return d[1];
+        return y_scale(d[1]);
     })
     .attr('r',function(d){
-        return d[1]/5;
+        return r_scale(d[0]);
     })
     .attr('fill',function(){
         return '#'+(Math.random()*0xFFFFFF<<0).toString(16);
@@ -144,7 +152,7 @@ svg1.selectAll('text')
         return x_scale(d[0]);
     })
     .attr('y',function(d){
-        return y_scale(d[0]);
+        return y_scale(d[1]);
     })
 
 var slices= [100,200,300,400,500];
@@ -152,8 +160,36 @@ var x = d3.scaleLinear()
     .domain([d3.min(slices),d3.max(slices)])
     .range([10,350]);
 
+/*
 console.log(x(600))
-dashboard()
+var my_data=dashboard()
+
+console.log(my_data[0]);
+
+/*
+
+var water_svg= d3.select("#water")
+    .append('svg')
+    .attr('width', chart_width)
+    .attr('height', chart_height);
+
+water_svg.selectAll('rect')
+    .data()
+    .enter()
+    .append('rect')
+    .attr('x',my_data[1])
+    .attr('y',my_data[0])
+    .attr('width',function(d){
+        return d;
+    })
+    .attr('height',function(d){
+        return d;
+    });
+*/
+
+
+
+
     //create levels
 /*
 function generate(dataset){

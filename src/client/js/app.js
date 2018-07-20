@@ -58,8 +58,13 @@ svg.selectAll('text')
 // scatterplot
 var data2 = [
     [400,200],
-    [700,250],
-    [50,100]
+    [210,140],
+    [722,300],
+    [70,160],
+    [250,50],
+    [110,280],
+    [699,225],
+    [90,220]
 ]
 
 
@@ -69,16 +74,29 @@ var svg2 = d3.select('#chart2')
     .attr('width', chart_width)
     .attr('height',chart_height)
 
+//create scale
+var x_scale = d3.scaleLinear()
+    .domain([0,d3.max(data2,function(d){
+        return d[0]
+    })])
+    .range([0,chart_width]);
+
+
+var y_scale = d3.scaleLinear()
+    .domain([0,d3.max(data2,function(d){
+        return d[1]
+    })])
+    .range([0,chart_height])
 
 svg2.selectAll('circle')
     .data(data2)
     .enter()
     .append('circle')
     .attr('cx',function(d){
-        return d[0]
+        return x_scale(d[0])
     })
     .attr('cy',function(d){
-        return d[1]
+        return y_scale(d[1])
     })
     .attr('r',function(d){
         return d[1]/5
@@ -93,10 +111,10 @@ svg2.selectAll('text')
         return d
     })
     .attr('x',function(d){
-        return d[0]
+        return x_scale(d[0])
     })
     .attr('y',function(d){
-        return d[1]
+        return y_scale(d[1])
     })
 
 var slices = [100,200,300,400,500,600]

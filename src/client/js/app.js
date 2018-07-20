@@ -55,6 +55,58 @@ svg.selectAll('text')
 
 
 
+// scatterplot
+var data2 = [
+    [400,200],
+    [700,250],
+    [50,100]
+]
+
+
+
+var svg2 = d3.select('#chart2')
+    .append('svg')
+    .attr('width', chart_width)
+    .attr('height',chart_height)
+
+
+svg2.selectAll('circle')
+    .data(data2)
+    .enter()
+    .append('circle')
+    .attr('cx',function(d){
+        return d[0]
+    })
+    .attr('cy',function(d){
+        return d[1]
+    })
+    .attr('r',function(d){
+        return d[1]/5
+    })
+    .attr('fill','#D1AB0E')
+
+svg2.selectAll('text')
+    .data(data2)
+    .enter()
+    .append('text')
+    .text(function(d) {
+        return d
+    })
+    .attr('x',function(d){
+        return d[0]
+    })
+    .attr('y',function(d){
+        return d[1]
+    })
+
+
+
+
+
+
+
+
+
 
 
 

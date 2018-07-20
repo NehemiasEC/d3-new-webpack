@@ -1,5 +1,72 @@
 import * as d3 from 'd3';
 
+var data = []
+
+for(var i=0;i<10;i++){
+    data.push(Math.floor(d3.randomUniform(10,100)()))
+}
+
+console.log(data);
+
+ var chart_width = 800
+ var chart_height = 400
+ var padding = 10
+
+//create svg
+var svg = d3.select("#chart")
+    .append("svg")
+    .attr('width',chart_width )
+    .attr('height', chart_height)
+
+
+//Binding Data and Create Rect
+svg.selectAll('rect')
+    .data(data)
+    .enter()
+    .append('rect')
+    .attr('x',function(d,i){
+        return i*(chart_width/data.length)
+    })
+    .attr('y',function(d){
+        return chart_height-d*3;
+    })
+    .attr('width',chart_width/data.length - padding)
+    .attr('height',function(d){
+        return d*3
+    })
+    .attr('fill','#7ED26D')
+
+svg.selectAll('text')
+    .data(data)
+    .enter()
+    .append('text')
+    .text(function(d){
+        return d
+    })
+    .attr('x',function(d,i){
+        return i*(chart_width/data.length)+15
+    })
+    .attr('y',function(d,i){
+        return chart_height-d*3
+    })
+    .attr('font-size','24px')
+    .attr('fill','#000')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

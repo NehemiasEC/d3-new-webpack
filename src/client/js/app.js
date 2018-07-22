@@ -222,6 +222,59 @@ svg3.selectAll('text')
     })
 
 
+//chart 4 axis
+var x_axis = d3.axisBottom(x_scale)
+    //.ticks(4)
+    .tickValues([0,150,250,350,600])
+
+var y_axis = d3.axisLeft(y_scale)
+    .ticks(5)
+
+var svg4= d3.select("#chart4")
+    .append('svg')
+    .attr('width',chart_width)
+    .attr('height', chart_height)
+
+
+
+svg4.append('g')
+    .attr('class','y-axis')
+    .attr('tranform','translate('+(padding)+',0)')
+    .call(y_axis);
+
+
+
+svg4.selectAll('circle')
+    .data(data3)
+    .enter()
+    .append('circle')
+    .attr('cx',function(d){
+        return scale_time_x(d.date)
+    })
+    .attr('cy',function(d){
+        return scale_time_y(d.num)
+    })
+    .attr('r',function(d){
+        return a_scale_3(d.num)
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

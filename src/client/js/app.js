@@ -1,4 +1,6 @@
 import * as d3 from 'd3';
+import randomcolor from 'randomcolor'
+
 
 var data = []
 
@@ -6,11 +8,15 @@ for(var i=0;i<10;i++){
     data.push(Math.floor(d3.randomUniform(10,100)()))
 }
 
+var random= randomcolor()
+
+
+
 console.log(data);
 
  var chart_width = 800
  var chart_height = 400
- var padding = 10
+ var padding = 50
 
 //create svg
 var svg = d3.select("#chart")
@@ -52,9 +58,6 @@ svg.selectAll('text')
     .attr('font-size','24px')
     .attr('fill','#000')
 
-
-
-
 // scatterplot
 var data2 = [
     [400,200],
@@ -79,14 +82,27 @@ var x_scale = d3.scaleLinear()
     .domain([0,d3.max(data2,function(d){
         return d[0]
     })])
-    .range([0,chart_width]);
+    .range([padding,chart_width-padding]);
 
 
 var y_scale = d3.scaleLinear()
     .domain([0,d3.max(data2,function(d){
         return d[1]
     })])
-    .range([0,chart_height])
+    .range([chart_height-padding,padding])
+
+
+var r_scale = d3.scaleLinear()
+    .domain([0,d3.max(data2,function(d){
+        return d[0];
+    })])
+    .range([5,30])
+
+var a_scale= d3.scaleSqrt()
+    .domain([0,d3.max(data2,function(d){
+        return d[1];
+    })])
+    .range([0,25])
 
 svg2.selectAll('circle')
     .data(data2)
@@ -99,7 +115,7 @@ svg2.selectAll('circle')
         return y_scale(d[1])
     })
     .attr('r',function(d){
-        return d[1]/5
+        return a_scale(d[1])
     })
     .attr('fill','#D1AB0E')
 
@@ -122,7 +138,103 @@ var scale = d3.scaleLinear()
     .domain([d3.min(slices),d3.max(slices)])
     .range([0,100])
 
-console.log(scale(600));
+console.log(scale(600))
+
+
+
+
+
+// scatterplot
+
+var data3 = [
+    {date:'07/01/2017',num:20},
+    {date:'07/02/2017',num:37},
+    {date:'07/03/2017',num:25},
+    {date:'07/04/2017',num:45},
+    {date:'07/05/2017',num:23},
+    {date:'07/06/2017',num:33},
+    {date:'07/07/2017',num:49},
+    {date:'07/08/2017',num:40},
+    {date:'07/09/2017',num:36}
+]
+var time_parse= d3.timeParse('%m/%d/%Y')
+var time_format= d3.timeFormat('%A %e %B')
+
+data3.map(function(d,i){
+    data3[i].date = time_parse(d.date)
+})
+
+
+var svg3 = d3.select("#chart3")
+    .append('svg')
+    .attr('width',chart_width)
+    .attr('height',chart_height)
+
+var scale_time_x = d3.scaleTime()
+    .domain([d3.min(data3,function(d){
+        return d.date;
+    }),d3.max(data3,function(d){
+        return d.date;
+    })])
+    .range([padding,chart_width-padding*2])
+
+var scale_time_y = d3.scaleLinear()
+    .domain([0,d3.max(data3,function(d){
+        return d.num
+    })])
+    .range([chart_height-padding,padding])
+
+
+var a_scale_3= d3.scaleSqrt()
+    .domain([0,d3.max(data3,function(d){
+        return d.num;
+    })])
+    .range([0,25])
+
+
+svg3.selectAll('circle')
+    .data(data3)
+    .enter()
+    .append('circle')
+    .attr('cx',function(d){
+        return scale_time_x(d.date)
+    })
+    .attr('cy',function(d){
+        return scale_time_y(d.num)
+    })
+    .attr('r',function(d){
+        return a_scale_3(d.num)
+    })
+    .attr('fill',random)
+
+svg3.selectAll('text')
+    .data(data3)
+    .enter()
+    .append('text')
+    .text(function(d){
+        return time_format(d.date)
+    })
+    .attr('x',function(d){
+        return scale_time_x(d.date)
+    })
+    .attr('y',function(d){
+        return scale_time_y(d.num)
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
